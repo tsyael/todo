@@ -1,4 +1,6 @@
-# Steps for helm chart creation - Advanced DevOps course
+# Steps for helm chart creation & uploading to ChartMuseum - Advanced DevOps course
+
+## Helm chart creation
 
 (1) Create the new helm chart : 
 
@@ -66,6 +68,30 @@
 
 ![image](https://user-images.githubusercontent.com/37069188/173137576-da5fc179-985f-4b2a-a891-bd06a6e40be9.png)
 
+
+## Uploading to ChartMuseum
+
+Verify the chart before uploaing : 
+
+`helm lint`
+
+Package the chart : 
+
+`helm package .`
+
+Upload the chart to chartmuseum : 
+
+`curl -L --data-binary "@todo-0.1.0.tgz" http://localhost:8081/api/charts`
+
+Update the helm repo : 
+
+`helm repo update`
+
+Install from ChartMuseum : 
+
+`helm install todo-demo chartmuseum/todo`
+
+![image](https://user-images.githubusercontent.com/37069188/173144894-0bd1fe50-7f42-4323-8076-fe861985da05.png)
 
 
 
