@@ -2,13 +2,23 @@
 
 (1) Create the new helm chart : 
 
-`helm create exe3`
+`helm create todo`
 
 (2) Changes performed on values.yaml : 
 
+* Configure # of replicas - 
 `replicaCount: 3`
 
+* Configure repo for pods deployment : 
 `repository: avielb/todo`
+
+* Configure NodePort service : 
+
+  `type: NodePort`
+
+  `port: 8080`
+
+  `targetPort: 8080`
 
 (3) Verify the created chart :
 
@@ -16,7 +26,7 @@
 
 (4) Installing the new chart : 
 
-`helm upgrade -i exe3 ./`
+`helm upgrade -i todo ./`
 
 (5) Changes performed on templates/deployment.yaml (due to image pulling issue - see below) : 
 
@@ -26,19 +36,19 @@
 
 (6) Delete the current chart + recreate it :
 
-`helm delete exe3`
+`helm delete todo`
 
-`helm upgrade -i exe3 ./`
+`helm upgrade -i todo ./`
 
 (7) Verify the created 3 pods + service : 
 
 `kubectl get pods`
 
-![image](https://user-images.githubusercontent.com/37069188/173135256-c1958bd8-51fd-42d5-98ef-3dc33d9cf0d4.png)
+![image](https://user-images.githubusercontent.com/37069188/173137656-f0c78b4d-e46d-4493-8516-14ddceb34dec.png)
 
 `kubectl get services`
 
-![image](https://user-images.githubusercontent.com/37069188/173135368-0c33a8ee-f607-4113-a9b2-f06096b8b8e4.png)
+![image](https://user-images.githubusercontent.com/37069188/173137694-d5c998b2-6ba5-46b9-8911-7c1863ff1061.png)
 
 (8) Verify that the deployed application is accessible : 
 
@@ -50,12 +60,11 @@
 
 `echo http://$NODE_IP:$NODE_PORT`
 
-![image](https://user-images.githubusercontent.com/37069188/173135710-bb519e49-f632-453a-9509-79b1f9a72fc0.png)
+![image](https://user-images.githubusercontent.com/37069188/173137511-33efbb06-7e50-4e13-92e4-7e8e48fec991.png)
 
 * Access the retrieved URL using a browser : 
 
-![todos_pic_browser](https://user-images.githubusercontent.com/37069188/173135802-e57c0151-4cdb-4e27-ad2f-6553b2fbe547.PNG)
-
+![image](https://user-images.githubusercontent.com/37069188/173137576-da5fc179-985f-4b2a-a891-bd06a6e40be9.png)
 
 
 
